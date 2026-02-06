@@ -1,0 +1,145 @@
+
+SPEECH EMOTION RECOGNITION PROJECT (PYTHON)
+
+========================================
+PROJECT OVERVIEW
+========================================
+This project implements a Speech Emotion Recognition (SER) system using deep learning.
+The system detects human emotions from speech audio signals such as:
+Neutral, Calm, Happy, Sad, Angry, Fear, Disgust, and Surprise.
+
+The project includes:
+1. Dataset loading and preprocessing
+2. Feature extraction using MFCC
+3. CNN + LSTM deep learning model training
+4. Model evaluation and saving
+5. A simple GUI frontend using PySimpleGUI
+6. Real-time emotion prediction using microphone input
+
+========================================
+DATASET DETAILS
+========================================
+Recommended Dataset: RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song)
+
+Dataset structure example:
+dataset/
+ ├── Actor_01/
+ │   ├── 03-01-01-01-01-01-01.wav
+ │   ├── 03-01-03-01-01-01-01.wav
+ ├── Actor_02/
+ │   ├── 03-01-04-01-01-01-02.wav
+
+
+Emotion Code Mapping:
+01 → Neutral
+02 → Calm
+03 → Happy
+04 → Sad
+05 → Angry
+06 → Fear
+07 → Disgust
+08 → Surprise
+
+All audio files are in WAV format and sampled at 22050 Hz.
+
+========================================
+FEATURE EXTRACTION
+========================================
+- Librosa is used to load audio files
+- MFCC (Mel-Frequency Cepstral Coefficients) are extracted
+- 40 MFCC features are computed
+- Mean of MFCC values is taken to form a fixed-size feature vector
+
+Function:
+extract_features(file_path)
+
+========================================
+MODEL ARCHITECTURE
+========================================
+The model is built using TensorFlow/Keras.
+
+Layers used:
+- Conv1D (64 filters)
+- MaxPooling1D
+- Dropout
+- Conv1D (128 filters)
+- MaxPooling1D
+- Dropout
+- LSTM (64 units)
+- Dense (64 units)
+- Output Dense layer with Softmax activation
+
+Loss Function:
+- Sparse Categorical Crossentropy
+
+Optimizer:
+- Adam
+
+========================================
+MODEL TRAINING
+========================================
+- Dataset is split into training (80%) and testing (20%)
+- Model is trained for 50 epochs
+- Batch size: 32
+- Validation is done on test data
+- Accuracy is printed after evaluation
+
+Saved Model:
+speech_emotion_model.keras
+
+========================================
+FRONTEND (GUI)
+========================================
+Frontend is created using PySimpleGUI.
+
+Features:
+- Select WAV file and predict emotion
+- Record live audio using microphone (3 seconds)
+- Display predicted emotion on screen
+
+Libraries used:
+- PySimpleGUI
+- sounddevice
+- soundfile
+- tempfile
+
+========================================
+REAL-TIME PREDICTION
+========================================
+- User clicks "Record & Predict Emotion"
+- Audio is recorded via microphone
+- Audio is temporarily saved as WAV
+- Model predicts emotion from recorded audio
+
+========================================
+HOW TO RUN
+========================================
+1. Install dependencies:
+pip install numpy librosa tensorflow scikit-learn pysimplegui sounddevice soundfile
+
+2. Place dataset folder in project directory:
+dataset/
+
+3. Run the script:
+python speech.py
+
+========================================
+OUTPUT
+========================================
+- Training accuracy printed in terminal
+- GUI window opens
+- Emotion prediction displayed in real-time
+
+========================================
+AUTHOR NOTE
+========================================
+This project is suitable for beginners in:
+- Machine Learning
+- Deep Learning
+- Audio Processing
+- Python GUI development
+
+It can be extended by:
+- Adding more emotions
+- Using transformer models
+- Deploying as a web application
